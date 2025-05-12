@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Greenflag – Admin</title>
+        <link
+            rel="shortcut icon"
+            href="images/flag-svgrepo-com.svg"
+            type="image/x-icon"
+        />
+
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="styles/style.css" />
+    </head>
+    <body class="m-0 p-0">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg sticky-top fs-5">
+            <div class="container">
+                <a
+                    class="custom-navbar-greenflag fw-bold d-flex align-items-center"
+                    href="index.html"
+                    ><img
+                        class="custom-logo me-1"
+                        src="images/flag-svgrepo-com.svg"
+                        alt="icon"
+                    />Greenflag</a
+                >
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                >
+                    <span
+                        class="navbar-toggler-icon"
+                        style="filter: invert(1)"
+                    ></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="index.html"
+                                >Home</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="products.html"
+                                >Collectie</a
+                            >
+                        </li>
+                        <li class="nav-item position-relative">
+                            <a class="nav-link fw-bold" href="winkelmandje.html"
+                                >Winkelmandje</a
+                            >
+                            <span id="cart-badge" class="cart-badge d-none"
+                                >0</span
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                class="nav-link fw-bold custom-active"
+                                href="admin.html"
+                                >Admin</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main>
+            <!-- Admin Panel Header -->
+            <section class="hero text-center">
+                <div class="container text-center">
+                    <h1 class="fw-bold">Admin Panel</h1>
+                    <p>Beheer producten en winkelmandje</p>
+                </div>
+            </section>
+
+            <!-- Admin Content -->
+            <section class="container py-5">
+                <div class="row justify-content-center g-4">
+                    <!-- Reset Cart -->
+                    <div class="col-md-4">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-header bg-success text-white">
+                                <h3 class="card-title text-center mb-0">
+                                    Winkelmandje Reset
+                                </h3>
+                            </div>
+                            <div
+                                class="card-body d-flex flex-column align-items-center justify-content-between"
+                            >
+                                <p class="card-text text-center mb-4">
+                                    Verwijder alle items uit het winkelmandje
+                                </p>
+                                <button
+                                    id="resetCartButton"
+                                    class="btn btn-success mb-3"
+                                >
+                                    Reset Winkelmandje
+                                </button>
+                                <div
+                                    id="alertReset"
+                                    class="alert alert-success d-none mt-3 w-100"
+                                >
+                                    Winkelmandje is gereset!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Product -->
+                    <div class="col-md-4">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-header bg-success text-white">
+                                <h3 class="card-title text-center mb-0">
+                                    Product Toevoegen
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="addProductForm">
+                                    <div class="mb-3">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="addProductName"
+                                            placeholder="Naam"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="mb-3">
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            id="addProductPrice"
+                                            placeholder="Prijs"
+                                            step="0.01"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="mb-3">
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            id="addProductStock"
+                                            placeholder="Voorraad"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="mb-3">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="addProductSize"
+                                            placeholder="Maat"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="mb-3">
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            id="addProductDiscount"
+                                            placeholder="Korting %"
+                                            value="0"
+                                        />
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        id="addProductButton"
+                                        class="btn btn-success w-100"
+                                    >
+                                        Product Toevoegen
+                                    </button>
+                                </form>
+                                <div
+                                    id="alertAdd"
+                                    class="alert alert-success d-none mt-3"
+                                >
+                                    Product toegevoegd!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Remove Product -->
+                    <div class="col-md-4">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-header bg-success text-white">
+                                <h3 class="card-title text-center mb-0">
+                                    Product Verwijderen
+                                </h3>
+                            </div>
+                            <div
+                                class="card-body d-flex flex-column align-items-center justify-content-between"
+                            >
+                                <div class="w-100 mb-3">
+                                    <label
+                                        for="productSelector"
+                                        class="form-label"
+                                        >Selecteer product:</label
+                                    >
+                                    <select
+                                        class="form-select"
+                                        id="productSelector"
+                                    >
+                                        <option value="">
+                                            Selecteer een product
+                                        </option>
+                                        <!-- Options will be filled dynamically -->
+                                    </select>
+                                </div>
+                                <button
+                                    id="removeProductButton"
+                                    class="btn btn-danger mb-3 w-100"
+                                >
+                                    Product Verwijderen
+                                </button>
+                                <div
+                                    id="alertRemove"
+                                    class="alert alert-success d-none mt-3 w-100"
+                                >
+                                    Product verwijderd!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer text-center py-3">
+            <p>&copy; 2025 Nick Rinkel</p>
+        </footer>
+
+        <!-- Toast container for notifications -->
+        <div
+            id="toast-container"
+            class="position-fixed bottom-0 end-0 p-3"
+        ></div>
+
+        <!-- Bootstrap JS Bundle -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Admin Script -->
+        <script src="scripts/admin.js"></script>
+        <script src="scripts/winkelmandje.js"></script>
+    </body>
+</html>

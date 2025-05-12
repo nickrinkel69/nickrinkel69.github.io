@@ -1,0 +1,146 @@
+:root {
+    --primaryColor: #2e7d32;
+    --activeNavbarColor: #1b5e20;
+    --hoverColor: #a5d6a7;
+    --heroBackgroundColor: #e8f5e9;
+    --footerColor: #f1f8e9;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--primaryColor);
+}
+
+.custom-navbar-greenflag,
+.nav-link {
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.custom-navbar-greenflag:hover,
+.nav-link:hover {
+    color: var(--hoverColor);
+}
+
+.custom-logo {
+    height: 1.5rem;
+}
+
+.custom-active {
+    color: var(--activeNavbarColor);
+}
+
+/* Hero section */
+.hero {
+    background-color: var(--heroBackgroundColor);
+    padding: 100px 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    color: var(--primaryColor);
+}
+
+.hero p {
+    font-size: 18px;
+    color: #555;
+}
+
+.btn-success {
+    background-color: var(--primaryColor);
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: var(--hoverColor);
+}
+
+/* Deals section */
+#deals {
+    min-height: 50vh;
+}
+
+/* Footer section */
+.footer {
+    background-color: var(--footerColor);
+    color: #333;
+    font-size: 14px;
+    text-align: center;
+    padding: 15px 0;
+}
+
+main {
+    flex: 1;
+}
+
+#productList {
+    background-image: linear-gradient(-45deg, #2e7d32, #a5d6a7);
+    min-height: 90vh;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 10px;
+    background-color: var(--activeNavbarColor);
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-section {
+    min-height: 60vh;
+    background-color: var(--heroBackgroundColor);
+    padding: 30px 0;
+}
+
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+}
+
+.toast {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.toast.show {
+    display: block;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 10px;
+    background-color: var(--activeNavbarColor);
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Greenflag – Home</title>
+        <link
+            rel="shortcut icon"
+            href="images/flag-svgrepo-com.svg"
+            type="image/x-icon"
+        />
+
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="styles/style.css" />
+    </head>
+    <body class="m-0 p-0">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg sticky-top fs-5">
+            <div class="container">
+                <a
+                    class="custom-navbar-greenflag fw-bold d-flex align-items-center"
+                    href="index.html"
+                    ><img
+                        class="custom-logo me-1"
+                        src="images/flag-svgrepo-com.svg"
+                        alt="icon"
+                    />Greenflag</a
+                >
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                >
+                    <span
+                        class="navbar-toggler-icon"
+                        style="filter: invert(1)"
+                    ></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a
+                                class="nav-link fw-bold custom-active"
+                                href="index.html"
+                                >Home</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="products.html"
+                                >Collectie</a
+                            >
+                        </li>
+                        <li class="nav-item position-relative">
+                            <a class="nav-link fw-bold" href="winkelmandje.html"
+                                >Winkelmandje</a
+                            >
+                            <span id="cart-badge" class="cart-badge d-none"
+                                >0</span
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main>
+            <!-- Hero -->
+            <section class="hero text-center">
+                <div class="container text-center">
+                    <h1 class="fw-bold">Welkom bij Greenflag</h1>
+                    <p>
+                        Ontdek duurzame en stijlvolle kleding, allemaal op deze
+                        website!
+                    </p>
+                    <a
+                        href="products.html"
+                        class="fs-4 btn btn-success mt-3 text-color"
+                        >Bekijk Collectie</a
+                    >
+                </div>
+            </section>
+
+            <!-- Deals -->
+            <section id="deals" class="container py-5">
+                <h2 class="section-title text-center">Aanbiedingen laden...</h2>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer text-center py-3">
+            <p>&copy; 2025 Nick Rinkel</p>
+        </footer>
+
+        <!-- Toast container for notifications -->
+        <div
+            id="toast-container"
+            class="position-fixed bottom-0 end-0 p-3"
+        ></div>
+
+        <!-- Bootstrap JS Bundle -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Shopping Cart Script -->
+        <script src="scripts/winkelmandje.js"></script>
+        <!-- Homepage Script -->
+        <script src="scripts/index.js"></script>
+    </body>
+</html>

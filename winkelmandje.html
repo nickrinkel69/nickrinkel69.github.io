@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Winkelmandje - Greenflag</title>
+        <link
+            rel="shortcut icon"
+            href="images/flag-svgrepo-com.svg"
+            type="image/x-icon"
+        />
+
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="styles/style.css" />
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg sticky-top fs-5">
+            <div class="container">
+                <a
+                    class="custom-navbar-greenflag fw-bold d-flex align-items-center"
+                    href="index.html"
+                    ><img
+                        class="custom-logo me-1"
+                        src="images/flag-svgrepo-com.svg"
+                        alt="navbaricon"
+                    />Greenflag</a
+                >
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                >
+                    <span
+                        class="navbar-toggler-icon"
+                        style="filter: invert(1)"
+                    ></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="index.html"
+                                >Home</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="products.html"
+                                >Collectie</a
+                            >
+                        </li>
+                        <li class="nav-item position-relative">
+                            <a
+                                class="nav-link fw-bold custom-active"
+                                href="winkelmandje.html"
+                                >Winkelmandje</a
+                            >
+                            <span id="cart-badge" class="cart-badge d-none"
+                                >0</span
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main>
+            <section class="cart-section">
+                <div class="container">
+                    <h1 class="mb-4 text-success">Winkelmandje</h1>
+
+                    <!-- Empty cart message -->
+                    <div id="empty-cart-message" class="text-center py-5">
+                        <h3 class="text-secondary">Je winkelmandje is leeg</h3>
+                        <p class="mb-4">Voeg producten toe om te bestellen</p>
+                        <a href="products.html" class="btn btn-success"
+                            >Bekijk Collectie</a
+                        >
+                    </div>
+
+                    <!-- Cart items will be loaded here -->
+                    <div id="cart-items" class="mb-4"></div>
+
+                    <!-- Cart Summary -->
+                    <div id="cart-summary" class="card shadow-sm mb-4 d-none">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">
+                                Bestelling Overzicht
+                            </h4>
+
+                            <div class="row mb-2">
+                                <div class="col-6">
+                                    z
+                                    <p>Subtotaal</p>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <p id="subtotal">€0.00</p>
+                                </div>
+                            </div>
+
+                            <div id="savings-row" class="row mb-2 d-none">
+                                <div class="col-6">
+                                    <p class="text-success">Totale besparing</p>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <p id="total-savings" class="text-success">
+                                        €0.00
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-6">
+                                    <p>Verzendkosten</p>
+                                    <p class="text-muted small">
+                                        Gratis verzending vanaf €50
+                                    </p>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <p id="shipping-cost">€4.95</p>
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <h5>Totaal</h5>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <h5 id="total" class="fw-bold">€0.00</h5>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <button
+                                    class="btn btn-outline-danger"
+                                    onclick="emptyCart()"
+                                >
+                                    Leegmaken
+                                </button>
+                                <button
+                                    class="btn btn-success"
+                                    onclick="finishOrder()"
+                                >
+                                    Afrekenen
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Toast container for notifications -->
+        <div id="toast-container" class="toast-container"></div>
+
+        <!-- Footer -->
+        <footer class="footer text-center py-3">
+            <p>&copy; 2025 Nick Rinkel</p>
+        </footer>
+
+        <!-- Bootstrap JS Bundle -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Main JS -->
+        <script src="scripts/winkelmandje.js"></script>
+    </body>
+</html>

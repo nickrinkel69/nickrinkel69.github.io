@@ -1,0 +1,74 @@
+[
+    {
+        "name": "Galaxy Wolf Hoodie",
+        "id": 0,
+        "stock": 20,
+        "size": "L",
+        "imageURL": "galaxy-wolf-hoodie.jpg",
+        "discount": 15,
+        "prize": 49.99
+    },
+    {
+        "name": "Rode Pet",
+        "id": 1,
+        "stock": 10,
+        "size": "M",
+        "imageURL": "rode-pet.jpg",
+        "discount": 10,
+        "prize": 19.99
+    },
+    {
+        "name": "Gele Sweater",
+        "id": 2,
+        "stock": 10,
+        "size": "S",
+        "imageURL": "gele-sweater.jpg",
+        "discount": 20,
+        "prize": 39.99
+    },
+    {
+        "name": "Groen T-shirt",
+        "id": 3,
+        "stock": 15,
+        "size": "L",
+        "imageURL": "groen-shirt.jpg",
+        "discount": 5,
+        "prize": 24.99
+    },
+    {
+        "name": "Underarmor T-shirt",
+        "id": 4,
+        "stock": 20,
+        "size": "L",
+        "imageURL": "underarmor.jpg",
+        "discount": 20,
+        "prize": 34.99
+    },
+    {
+        "name": "Greenflag Sweatpants",
+        "id": 5,
+        "stock": 30,
+        "size": "L, M, S",
+        "imageURL": "greenflag-sweatpants.jpg",
+        "discount": 30,
+        "prize": 44.99
+    },
+    {
+        "name": "Greenflag Hoodie",
+        "id": 6,
+        "stock": 30,
+        "size": "L, M, S",
+        "imageURL": "greenflag-hoodie.jpg",
+        "discount": 25,
+        "prize": 49.99
+    },
+    {
+        "name": "Greenflag T-shirt",
+        "id": 7,
+        "stock": 27,
+        "size": "L, M, S",
+        "imageURL": "greenflag-shirt.jpg",
+        "discount": 25,
+        "prize": 29.99
+    }
+]
