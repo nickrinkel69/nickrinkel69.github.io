@@ -1,20 +1,13 @@
 /**
  * Homepage functionality for Greenflag website
- * This script loads and displays discounted products on the homepage
  */
 
-/**
- * Gets product data from localStorage or initializes from JSON
- * @returns {Promise<Array>} Product data
- */
 async function getProductData() {
     let data = localStorage.getItem('productData');
 
     if (data) {
-        // If data is already in localStorage
         return JSON.parse(data);
     } else {
-        // If data is not in localStorage, fetch from JSON
         const APIurl = './products.json';
         try {
             const response = await fetch(APIurl);
@@ -25,7 +18,6 @@ async function getProductData() {
 
             const responseJSON = await response.json();
             localStorage.setItem('productData', JSON.stringify(responseJSON));
-            console.debug('Data retrieved from JSON and saved to localStorage');
             return responseJSON;
         } catch (error) {
             console.error('Error fetching product data:', error);
@@ -34,23 +26,12 @@ async function getProductData() {
     }
 }
 
-/**
- * Calculate the discounted price
- * @param {number} originalPrice - The original price
- * @param {number} discountPercentage - The discount percentage
- * @returns {number} - The discounted price rounded to 2 decimal places
- */
 function calculateDiscountedPrice(originalPrice, discountPercentage) {
     const discountAmount = originalPrice * (discountPercentage / 100);
     const discountedPrice = originalPrice - discountAmount;
     return Math.round(discountedPrice * 100) / 100;
 }
 
-/**
- * Gets the appropriate image for a product based on its ID
- * @param {Object} product - The product object
- * @returns {HTMLImageElement} - Image element with proper source
- */
 function createProductImage(product) {
     const img = document.createElement('img');
     img.classList.add('card-img-top', 'product-image');
@@ -72,7 +53,6 @@ function createProductImage(product) {
     if (imageMap[product.name]) {
         img.src = imageMap[product.name];
     } else {
-        // Use a gray placeholder if image not found
         img.src = 'images/placeholder.jpg';
     }
 
@@ -82,9 +62,6 @@ function createProductImage(product) {
     return img;
 }
 
-/**
- * Display discounted products on the homepage
- */
 async function displayDiscountedProducts() {
     // Get the container element
     const dealsSection = document.getElementById('deals');
@@ -250,11 +227,9 @@ async function displayDiscountedProducts() {
 
             // Add click handler to button
             addButton.addEventListener('click', function () {
-                // Check if winkelmandje.js is loaded and addToCart function exists
                 if (typeof addToCart === 'function') {
                     addToCart(product);
                 } else {
-                    // Fallback if winkelmandje.js is not loaded
                     alert(
                         `Product '${
                             product.name

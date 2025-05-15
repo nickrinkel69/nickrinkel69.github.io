@@ -1,45 +1,26 @@
-/**
- * Shopping Cart functionality for Greenflag website
- */
-
-// Initialize cart from localStorage or create empty cart
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-/**
- * Add a product to the shopping cart
- * @param {Object} product - The product to add
- */
 function addToCart(product) {
-    // Check if product already exists in cart
+    updateProductStock(product.id);
+
     const existingProductIndex = cart.findIndex(
         (item) => item.id === product.id,
     );
 
     if (existingProductIndex !== -1) {
-        // Product exists, increment quantity
         cart[existingProductIndex].quantity += 1;
     } else {
-        // Product doesn't exist, add to cart with quantity 1
         cart.push({
             ...product,
             quantity: 1,
         });
     }
 
-    // Save cart to localStorage
     saveCart();
-
-    // Update cart badge count
     updateCartBadge();
-
-    // Show success message
     showToast(`${product.name} is toegevoegd aan je winkelmandje!`);
 }
 
-/**
- * Show a toast message
- * @param {string} message - Message to display
- */
 function showToast(message) {
     const toastContainer = document.getElementById('toast-container');
     if (!toastContainer) return;
@@ -58,7 +39,6 @@ function showToast(message) {
 
     toastContainer.appendChild(toastElement);
 
-    // Remove toast after 3 seconds
     setTimeout(() => {
         toastElement.classList.remove('show');
         setTimeout(() => {
@@ -67,16 +47,10 @@ function showToast(message) {
     }, 3000);
 }
 
-/**
- * Save cart to localStorage
- */
 function saveCart() {
     localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-/**
- * Update cart badge with current item count
- */
 function updateCartBadge() {
     const cartBadge = document.getElementById('cart-badge');
     if (!cartBadge) return;
@@ -91,10 +65,6 @@ function updateCartBadge() {
     }
 }
 
-/**
- * Remove an item from the cart
- * @param {number} productId - ID of the product to remove
- */
 function removeFromCart(productId) {
     cart = cart.filter((item) => item.id !== productId);
     saveCart();
@@ -102,13 +72,7 @@ function removeFromCart(productId) {
     updateCartBadge();
 }
 
-/**
- * Change the quantity of a product in the cart
- * @param {number} productId - ID of the product
- * @param {number} newQuantity - New quantity (must be > 0)
- */
 function updateQuantity(productId, newQuantity) {
-    // Ensure quantity is valid
     newQuantity = parseInt(newQuantity);
     if (isNaN(newQuantity) || newQuantity < 1) newQuantity = 1;
 
@@ -121,21 +85,12 @@ function updateQuantity(productId, newQuantity) {
     }
 }
 
-/**
- * Calculate final price considering discount
- * @param {number} originalPrice - Original price
- * @param {number} discount - Discount percentage
- * @returns {number} - Final price with discount applied
- */
 function calculateFinalPrice(originalPrice, discount) {
     if (!discount || discount <= 0) return originalPrice;
     const discountAmount = originalPrice * (discount / 100);
     return Math.round((originalPrice - discountAmount) * 100) / 100;
 }
 
-/**
- * Display the cart contents in the UI
- */
 function displayCart() {
     const cartContainer = document.getElementById('cart-items');
     const emptyCartMessage = document.getElementById('empty-cart-message');
@@ -143,25 +98,20 @@ function displayCart() {
 
     if (!cartContainer || !emptyCartMessage || !cartSummary) return;
 
-    // Clear current cart display
     cartContainer.innerHTML = '';
 
     if (cart.length === 0) {
-        // Show empty cart message
         emptyCartMessage.classList.remove('d-none');
         cartSummary.classList.add('d-none');
         return;
     }
 
-    // Hide empty cart message and show summary
     emptyCartMessage.classList.add('d-none');
     cartSummary.classList.remove('d-none');
 
-    // Calculate totals
     let subtotal = 0;
     let totalSavings = 0;
 
-    // Add each item to the cart display
     cart.forEach((item) => {
         const originalPrice = item.prize * item.quantity;
         const finalPrice =
@@ -250,7 +200,6 @@ function displayCart() {
         cartContainer.appendChild(cartItemElement);
     });
 
-    // Update summary totals
     document.getElementById('subtotal').textContent = `€${subtotal.toFixed(2)}`;
 
     const savingsElement = document.getElementById('total-savings');
@@ -261,19 +210,14 @@ function displayCart() {
         document.getElementById('savings-row').classList.add('d-none');
     }
 
-    // Fixed shipping cost
     const shippingCost = subtotal >= 50 ? 0 : 4.95;
     document.getElementById('shipping-cost').textContent =
         shippingCost === 0 ? 'Gratis' : `€${shippingCost.toFixed(2)}`;
 
-    // Calculate total
     const total = subtotal + shippingCost;
     document.getElementById('total').textContent = `€${total.toFixed(2)}`;
 }
 
-/**
- * Empty the entire cart
- */
 function emptyCart() {
     if (confirm('Weet je zeker dat je je winkelmandje wilt leegmaken?')) {
         cart = [];
@@ -283,9 +227,6 @@ function emptyCart() {
     }
 }
 
-/**
- * Finish the order (simple alert for demonstration)
- */
 function finishOrder() {
     alert(
         'Bestelling geplaatst! Dit is een demonstratie, dus er wordt niets afgerekend.',
@@ -296,23 +237,16 @@ function finishOrder() {
     updateCartBadge();
 }
 
-// Update products.js to use our addToCart function
-// This function will be called when the page loads
 function updateAddToCartButtons() {
-    // Check if we're on the products page
     if (window.location.pathname.includes('products.html')) {
-        // Replace the existing click handlers on add buttons
         const addButtons = document.querySelectorAll('.btn-success');
         addButtons.forEach((button) => {
-            // Get the product data
             const productCard = button.closest('.card');
             if (!productCard) return;
 
-            // Clear existing event listeners
             const newButton = button.cloneNode(true);
             button.parentNode.replaceChild(newButton, button);
 
-            // Add new event listener
             newButton.addEventListener('click', function () {
                 const nameElement = productCard.querySelector('.card-title');
                 if (!nameElement) return;
@@ -324,11 +258,9 @@ function updateAddToCartButtons() {
                     '.card-text:nth-of-type(2)',
                 );
 
-                let priceText = '';
                 let price = 0;
                 let discount = 0;
 
-                // Extract price and discount information
                 const priceElement = productCard.querySelector(
                     '.card-text:nth-of-type(3)',
                 );
@@ -341,7 +273,6 @@ function updateAddToCartButtons() {
                         discountElement &&
                         discountElement.textContent.includes('Korting')
                     ) {
-                        // Has discount
                         discount = parseInt(
                             discountElement.textContent.match(/\d+/)[0],
                         );
@@ -358,16 +289,14 @@ function updateAddToCartButtons() {
                             );
                         }
                     } else {
-                        // No discount
                         price = parseFloat(
                             priceElement.textContent.replace('€', ''),
                         );
                     }
                 }
 
-                // Create a product object
                 const product = {
-                    id: Date.now(), // Use timestamp as unique ID for the demo
+                    id: Date.now(),
                     name: nameElement.textContent.trim(),
                     size: sizeElement
                         ? sizeElement.textContent.replace('Maat:', '').trim()
@@ -383,90 +312,37 @@ function updateAddToCartButtons() {
                         : 10,
                 };
 
-                // Add product to cart
                 addToCart(product);
             });
         });
     }
 }
 
-// Initialize when the DOM is loaded
-document.addEventListener('DOMContentLoaded', function () {
-    // Initialize cart badge
-    updateCartBadge();
-
-    // Display cart if we're on the cart page
-    if (window.location.pathname.includes('winkelmandje.html')) {
-        displayCart();
-    }
-
-    // Update product add buttons if we're on the products page
-    // Use a slight delay to ensure products are loaded
-    setTimeout(updateAddToCartButtons, 500);
-});
-
-// Listen for changes from products.js
-if (typeof window.addEventListener === 'function') {
-    window.addEventListener('productsLoaded', updateAddToCartButtons);
-}
-
-/**
- * Add a product to the shopping cart and update stock
- * @param {Object} product - The product to add
- */
-function addToCart(product) {
-    // First, update the product stock in localStorage
-    updateProductStock(product.id);
-
-    // Check if product already exists in cart
-    const existingProductIndex = cart.findIndex(
-        (item) => item.id === product.id,
-    );
-
-    if (existingProductIndex !== -1) {
-        // Product exists, increment quantity
-        cart[existingProductIndex].quantity += 1;
-    } else {
-        // Product doesn't exist, add to cart with quantity 1
-        cart.push({
-            ...product,
-            quantity: 1,
-        });
-    }
-
-    // Save cart to localStorage
-    saveCart();
-
-    // Update cart badge count
-    updateCartBadge();
-
-    // Show success message
-    showToast(`${product.name} is toegevoegd aan je winkelmandje!`);
-}
-
-/**
- * Update product stock in localStorage when adding to cart
- * @param {number} productId - ID of the product to update
- */
 function updateProductStock(productId) {
-    // Get current product data from localStorage
     let productData = JSON.parse(localStorage.getItem('productData')) || [];
-
-    // Find the product and decrease stock
     const productIndex = productData.findIndex((item) => item.id === productId);
 
     if (productIndex !== -1 && productData[productIndex].stock > 0) {
-        // Decrease stock by 1
         productData[productIndex].stock -= 1;
-
-        // Update localStorage with new stock value
         localStorage.setItem('productData', JSON.stringify(productData));
 
-        // If we're on the products page, refresh the display
         if (window.location.pathname.includes('products.html')) {
-            // Trigger product refresh (will be picked up by products.js)
             const event = new CustomEvent('productStockUpdated');
             window.dispatchEvent(event);
         }
     }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    updateCartBadge();
+
+    if (window.location.pathname.includes('winkelmandje.html')) {
+        displayCart();
+    }
+
+    setTimeout(updateAddToCartButtons, 500);
+});
+
+if (typeof window.addEventListener === 'function') {
+    window.addEventListener('productsLoaded', updateAddToCartButtons);
 }

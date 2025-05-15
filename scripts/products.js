@@ -1,16 +1,9 @@
-/**
- * gets product data from localstorage or JSON
- * @returns {Array<Product>} all the products
- */
 async function getProductData() {
     let data = localStorage.getItem('productData');
 
     if (data) {
-        // if data is already in localstorage
         data = JSON.parse(data);
-        console.debug('data retrieved from localStorage');
     } else {
-        // if data is not in localstorage
         const APIurl = './products.json';
         try {
             const response = await fetch(APIurl);
@@ -22,7 +15,6 @@ async function getProductData() {
             const responseJSON = await response.json();
             data = responseJSON;
             localStorage.setItem('productData', JSON.stringify(responseJSON));
-            console.debug('data retrieved from json and put in localStorage');
         } catch (error) {
             console.error('Error fetching product data:', error);
             alert('Error loading products: ' + error.message);
@@ -33,12 +25,6 @@ async function getProductData() {
     return data;
 }
 
-/**
- * Calculate the discounted price
- * @param {number} originalPrice - The original price
- * @param {number} discountPercentage - The discount percentage
- * @returns {number} - The discounted price rounded to 2 decimal places
- */
 function calculateDiscountedPrice(originalPrice, discountPercentage) {
     const discountAmount = originalPrice * (discountPercentage / 100);
     const discountedPrice = originalPrice - discountAmount;
@@ -46,23 +32,16 @@ function calculateDiscountedPrice(originalPrice, discountPercentage) {
 }
 
 function printProductData(data) {
-    // find list element that all data will be appended
     const productListElement = document.getElementById('productList');
 
     // Clear any existing products first
     productListElement.innerHTML = '';
 
-    // Log the number of products to help with debugging
-    console.log(`Loading ${data.length} products`);
-
     for (let i = 0; i < data.length; i++) {
         // Add unique ID for cart functionality
         if (!data[i].id) {
-            data[i].id = i + 1; // Simple ID for demo
+            data[i].id = i + 1;
         }
-
-        // Log each product to verify it's being processed
-        console.log(`Processing product ${i + 1}:`, data[i]);
 
         // Create the main card container
         const divElement = document.createElement('div');
@@ -257,7 +236,6 @@ function loadWinkelmandjeScript() {
         script.src = 'scripts/winkelmandje.js';
         script.async = true;
         document.body.appendChild(script);
-        console.debug('Winkelmandje script loaded');
     }
 }
 

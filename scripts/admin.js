@@ -2,10 +2,6 @@
  * Admin functionality for Greenflag website
  */
 
-/**
- * Gets product data from localStorage or initializes empty array
- * @returns {Array} Product data
- */
 function getProductData() {
     let data = localStorage.getItem('productData');
 
@@ -16,21 +12,12 @@ function getProductData() {
     return [];
 }
 
-/**
- * Save product data to localStorage
- * @param {Array} data - The product data to save
- */
 function saveProductData(data) {
     localStorage.setItem('productData', JSON.stringify(data));
-    console.debug('Product data saved to localStorage');
 }
 
-/**
- * Reset the shopping cart
- */
 function resetCart() {
     localStorage.removeItem('cart');
-    console.debug('Shopping cart has been reset');
 
     // Update UI
     const alertElement = document.getElementById('alertReset');
@@ -50,10 +37,6 @@ function resetCart() {
     showToast('Winkelmandje is gereset!');
 }
 
-/**
- * Add a new product
- * @param {Event} event - The form submit event
- */
 function addProduct(event) {
     event.preventDefault();
 
@@ -91,7 +74,7 @@ function addProduct(event) {
     const newProduct = {
         id: newId,
         name: productName,
-        prize: productPrice, // Note: using "prize" to match existing data structure
+        prize: productPrice,
         stock: productStock,
         size: productSize,
         discount: productDiscount,
@@ -120,9 +103,6 @@ function addProduct(event) {
     showToast(`Product "${productName}" is toegevoegd!`);
 }
 
-/**
- * Remove a product
- */
 function removeProduct() {
     const selectElement = document.getElementById('productSelector');
     const productId = parseInt(selectElement.value);
@@ -169,9 +149,6 @@ function removeProduct() {
     showToast(`Product "${productName}" is verwijderd!`);
 }
 
-/**
- * Update the product selector dropdown
- */
 function updateProductSelector() {
     const selectElement = document.getElementById('productSelector');
 
@@ -196,11 +173,6 @@ function updateProductSelector() {
     });
 }
 
-/**
- * Show a toast message
- * @param {string} message - Message to display
- * @param {string} type - Bootstrap alert type (success, danger, etc.)
- */
 function showToast(message, type = 'success') {
     const toastContainer = document.getElementById('toast-container');
     if (!toastContainer) return;
